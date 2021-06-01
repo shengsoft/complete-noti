@@ -1,0 +1,436 @@
+{% if url_for(request.endpoint) == '/dashboard/email' %}
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'toolbar.html' %}
+<div class="payee-email">
+  <h1>Email</h1>
+  <form>
+     <input type="email" name="email" placeholder="E-mail" id="email" required><br>
+     <input type="text" name="subject" placeholder="Subject" id="email-subject" required><br>
+     <textarea name="message" placeholder="Message" id="email-message"></textarea><br>
+     <button>Send</button>
+  </form> 
+</div>
+{% endblock %}
+{% elif url_for(request.endpoint) == '/dashboard/send/email' %}
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="https://use.typekit.net/dgp4ock.css">  
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+       <style>
+
+           *{
+               padding: 0;
+               margin: 0;
+           }
+
+           html {
+             box-sizing: border-box;
+           }
+           body {
+              background: #fafafa;
+              width: 100%;
+            } 
+
+            header {
+              background: #34925E;
+              height: 100px;
+              width: 100%;
+            }
+
+           .container  {
+             background: #fafafa;
+             width: 100%;
+             height: 480px;
+             margin-top: 0;
+           }
+
+           #logo {
+              display: inline-block;
+              width: 64px;
+              height: 48px; 
+              margin: 25px auto 0 15px;
+            }
+
+            .container header h1 {
+              font: 800 2em montserrat, sans-serif;
+              color: #34925E;
+              text-align: center;
+              margin-top: 75px;
+            } 
+
+            .container main div {
+              width: 100%;
+              margin: 125px auto 0 50px;
+            }
+
+            .container main div p {
+              font: 400 1.4em montserrat, sans-serif;
+              color: #1e1e1e;
+              margin: 25px auto 0 auto;
+              text-align: left !important;
+            }
+
+            .container main div h1 {
+              font: 400 1.4em montserrat, sans-serif;
+              color: #34925E;    
+              background: rgb(0, 199, 140, 0.3);
+              border-radius: 10px;
+              padding: 15px;  
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+
+            }
+
+
+            .container footer {
+              margin: 300px auto 0 auto;
+              width: 100%;
+            }
+
+
+
+            .container footer ul {
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+            }
+
+            .container footer ul li {
+                text-align: center;
+                font-family: montserrat,sans-serif;
+                font-weight: 500;
+                font-style: normal; 
+                font-size: 0.8em;
+                margin: 10px 0;
+                color: #1e1e1e;
+                list-style-type: none;
+                display: inline;
+                padding-right: 5px;
+            }
+
+            .container footer ul li:last-child {
+               text-align: center;
+            }   
+
+            .container a {
+                color: #34925E;
+                font-family: montserrat,sans-serif;
+            }
+
+            @media(max-width: 414px) {
+                .container  {
+                    background: #fafafa;
+                    width: 100%;
+                }
+
+                body {
+                background: rgba(0, 199, 140, 0.3);
+               } 
+
+            }    
+
+
+           </style>
+          </head>
+    <body> 
+    <div class="container">    
+      <main>
+        <header>
+          <svg id="logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 558 582"><path d="M646.12,578.54c31,0,56.08,24.75,56.08,55.29s-25.11,55.29-56.08,55.29" transform="translate(-352.5 -416.5)" style="fill:#dbf4f0;stroke:#daf4f0;stroke-miterlimit:10"/><line x1="153.35" y1="95.34" x2="153.35" y2="552.5" style="fill:none;stroke:#daf4f0;stroke-linecap:round;stroke-miterlimit:10;stroke-width:40px"/><path d="M652.87,511.86c70.76,0,128.13,49.72,128.13,111.07S723.63,734,652.87,734" transform="translate(-352.5 -416.5)" style="fill:none;stroke:#daf4f0;stroke-linecap:round;stroke-miterlimit:10;stroke-width:40px"/><line x1="155.22" y1="94.99" x2="298.79" y2="94.99" style="fill:none;stroke:#daf4f0;stroke-linecap:round;stroke-miterlimit:10;stroke-width:40px"/><line x1="237.75" y1="175.87" x2="237.75" y2="517.31" style="fill:none;stroke:#daf4f0;stroke-linecap:round;stroke-miterlimit:10;stroke-width:30px"/><rect x="14" y="14" width="530" height="554" rx="108.97" style="fill:none;stroke:#daf4f0;stroke-miterlimit:10;stroke-width:28px"/></svg> 
+      </header> 
+        <div>
+            <p>{{message}}</p>
+        </div>
+      </main>  
+       <footer>
+        <ul>
+          <li>Payee Pro</li>
+          <li>Tel: 909-494-2186</li>
+          <li>Email: payeepro@gmail.com</li>
+          <li><br></li>
+          <li>Address: 473 E. Carnegie Drive, San Bernardino, CA</li>
+        </ul>
+       </footer>
+       </div>  
+    </body>
+</html>
+{% elif url_for(request.endpoint) == '/save_budget' %}
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="https://use.typekit.net/dgp4ock.css">  
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+       <style>
+
+           *{
+               padding: 0;
+               margin: 0;
+           }
+
+           html {
+             box-sizing: border-box;
+           }
+           body {
+              background: rgba(0, 199, 140, 0.3);
+            } 
+
+           .container  {
+             background: #fafafa;
+             width: 45%;
+             height: 480px;
+             margin-top: 75px;
+             padding: 50px;
+           }
+
+            .container header {
+            }
+
+            .container header h1 {
+              font: 800 2em montserrat, sans-serif;
+              color: #34925E;
+              text-align: center;
+              margin-top: 75px;
+            } 
+
+            .container main div {
+              width: 100%;
+              margin: 50px auto 0 auto;
+            }
+
+            .container main div p {
+              font: 400 1em montserrat, sans-serif;
+              color: #1e1e1e;
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+            }
+
+            .container main div h1 {
+              font: 400 1.4em montserrat, sans-serif;
+              color: #34925E;    
+              background: rgb(0, 199, 140, 0.3);
+              border-radius: 10px;
+              padding: 15px;  
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+
+            }
+
+
+            .container footer {
+              margin-top: 200px;
+              width: 100%;
+            }
+
+
+
+            .container footer ul {
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+            }
+
+            .container footer ul li {
+                text-align: center;
+                font-family: montserrat,sans-serif;
+                font-weight: 500;
+                font-style: normal; 
+                font-size: 0.8em;
+                margin: 10px 0;
+                color: #1e1e1e;
+                list-style-type: none;
+                display: inline;
+                padding-right: 5px;
+            }
+
+            .container footer ul li:last-child {
+               text-align: center;
+            }   
+
+            .container a {
+                color: #34925E;
+                font-family: montserrat,sans-serif;
+            }
+
+            @media(max-width: 414px) {
+                .container  {
+                    background: #fafafa;
+                    width: 95%;
+                }
+
+                body {
+                background: rgba(0, 199, 140, 0.3);
+               } 
+
+            }    
+
+
+
+       </style>
+    </head>
+    <body> 
+    <div class="container">   
+     <header>
+         <h1>Payee Pro</h1>
+     </header>   
+      <main>
+        <div>
+            <p>Your Invitation code is</p>
+            <h1>{{invitation_code }}</h1>
+        </div>
+      </main>  
+       <footer>
+        <ul>
+          <li>Payee Pro</li>
+          <li>Tel: 909-494-2186</li>
+          <li>Email: payeepro@gmail.com</li>
+          <li><br></li>
+          <li>Address: 473 E. Carnegie Drive, San Bernardino, CA</li>
+        </ul>
+       </footer>
+       </div>  
+    </body>
+</html>
+
+{% else %}
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="https://use.typekit.net/dgp4ock.css">  
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+       <style>
+
+           *{
+               padding: 0;
+               margin: 0;
+           }
+
+           html {
+             box-sizing: border-box;
+           }
+           body {
+              background: rgba(0, 199, 140, 0.3);
+            } 
+
+           .container  {
+             background: #fafafa;
+             width: 45%;
+             height: 480px;
+             margin-top: 75px;
+             padding: 50px;
+           }
+
+            .container header {
+            }
+
+            .container header h1 {
+              font: 800 2em montserrat, sans-serif;
+              color: #34925E;
+              text-align: center;
+              margin-top: 75px;
+            } 
+
+            .container main div {
+              width: 100%;
+              margin: 50px auto 0 auto;
+            }
+
+            .container main div p {
+              font: 400 1em montserrat, sans-serif;
+              color: #1e1e1e;
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+            }
+
+            .container main div h1 {
+              font: 400 1.4em montserrat, sans-serif;
+              color: #34925E;    
+              background: rgb(0, 199, 140, 0.3);
+              border-radius: 10px;
+              padding: 15px;  
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+
+            }
+
+
+            .container footer {
+              margin-top: 200px;
+              width: 100%;
+            }
+
+
+
+            .container footer ul {
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+            }
+
+            .container footer ul li {
+                text-align: center;
+                font-family: montserrat,sans-serif;
+                font-weight: 500;
+                font-style: normal; 
+                font-size: 0.8em;
+                margin: 10px 0;
+                color: #1e1e1e;
+                list-style-type: none;
+                display: inline;
+                padding-right: 5px;
+            }
+
+            .container footer ul li:last-child {
+               text-align: center;
+            }   
+
+            .container a {
+                color: #34925E;
+                font-family: montserrat,sans-serif;
+            }
+
+            @media(max-width: 414px) {
+                .container  {
+                    background: #fafafa;
+                    width: 95%;
+                }
+
+                body {
+                background: rgba(0, 199, 140, 0.3);
+               } 
+
+            }    
+
+
+
+       </style>
+    </head>
+    <body> 
+    <div class="container">   
+     <header>
+         <h1>Payee Pro</h1>
+     </header>   
+      <main>
+        <div>
+            <p>Your passcode is</p>
+            <h1>{{passcode}}</h1>
+        </div>
+      </main>  
+       <footer>
+        <ul>
+          <li>Payee Pro</li>
+          <li>Tel: 909-494-2186</li>
+          <li>Email: payeepro@gmail.com</li>
+          <li><br></li>
+          <li>Address: 473 E. Carnegie Drive, San Bernardino, CA</li>
+        </ul>
+       </footer>
+       </div>  
+    </body>
+</html>
+
+{% endif %}

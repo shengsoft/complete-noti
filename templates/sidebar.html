@@ -1,0 +1,44 @@
+<div class="sidebar">
+{% if url_for(request.endpoint) == '/dashboard/budget' %}
+<div class="client-budget-list">
+   <h3>Client budgets</h3>
+   {% for client in client_list %}
+    <!-- <div class="search-container"><input type="search" name="client-search" placeholder="Search"> -->
+      <div class="client-budget-details">
+         <div class="client-thumbnail">
+            {% if client['image']  ==  'null' %}
+            <i class="fas fa-user-circle"></i>
+            {% else %}
+            <img src="/static/images/{{ client['image'] }}">
+            {% endif %}
+         </div>
+         <div class="client-details">
+            <ul>
+            <li>{{ client['first_name'] }} {{ client['last_name'] }}</li>
+         {% for expense in client['expenses'] %}
+            {% for key, value in expense.items() %}
+                <li>{{ key }} : {{ value }}</li>
+            {% endfor %}
+         {% endfor %}
+            </ul>
+         </div>  
+      </div>
+      {% endfor %}    
+    </div>
+
+{% elif url_for(request.endpoint) == '/dashboard' %}  
+    {% include 'payee/chat.html' %}
+
+{% elif url_for(request.endpoint) == '/notifications' %}
+   {% include 'notifications.html' %}
+
+{% elif url_for(request.endpoint) == '/dashboard/print' %}  
+   <div id="client-list">
+     <h3>Clients</h3>
+     <p>Select the client below that you want to print their statement</p>
+   </div>
+   {% for client in clients %}
+   <p class="client" data-id="{{ client['_id'] }}">{{ client['first_name'] }} {{ client['last_name'] }}</p>
+   {% endfor %}   
+{% endif %}
+</div>

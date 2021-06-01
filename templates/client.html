@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'toolbar.html' %}
+
+<div id="client-header">
+   <div class="logo">
+      <button>logout</button>
+    </div>   
+</div>
+<div id="client-area">
+{% for c in client %}
+
+  <div id="client-details">
+    {% if c['image']  ==  '' or c['image'] == 'null' %}
+    <input type="file" name="upload" id="upload" />
+    <a href="#" id="upload-link" title="Click to add image"><i class="fas fa-user-circle"></i></a>
+    {% else %}
+    <img src="/static/images/{{ c['image'] }}">
+    {% endif %}
+    <h1>Hello {{ c['first_name'] }}</h1>
+  </div>  
+
+  <div id="budget-items">
+    {% for expense in c['expenses'] %}   
+    {% for key, value in expense.items() %}
+    {% if key != 'income_source' and key != 'budget_amount' %}
+        <ul>    
+          <li>{{ key }}&nbsp;&nbsp;&nbsp;<span>${{ value }}</span></li>
+        </ul> 
+       {% endif %} 
+   {% endfor %}      
+       <h1 id="amount">Monthly budget&nbsp;<span> ${{   expense['budget_amount'] }}</span></h1> 
+       {% set balance = expense['budget_amount']|int  - budget|int %} 
+       <h1 id="balance">Amount available&nbsp;<span> ${{ balance }}</span></h1> 
+    {% endfor %}
+   </div>
+ {% endfor %}
+ </div>
+
+<style>
+ #upload {
+   display: none;
+ }
+
+ #client-details p {
+   display: block;
+ }
+
+</style>
+<script>
+  // $(() => {
+  //   var socket = io.connect('http://' + document.domain + ':' + location.port)
+  //    $('#upload-link').on('click', (e) => {
+  //       e.preventDefault()
+  //       $('#upload:hidden').trigger('click')
+  //    })
+
+  //    if(location.pathname == `/client/dashboard/`) {
+  //          var cid = window.location.search.substring(4)
+  //      }
+
+
+  // })
+</script>
+<script src="{{ url_for('static', filename='javascript/chat.js')}}"></script>
+{% endblock %}
+
+
+
+

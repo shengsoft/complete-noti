@@ -1,0 +1,218 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'toolbar.html' %}
+{% set client_name = client['first_name'] + " " + client['last_name'] %}
+{% set payee_name = payee['first_name'] + " " + payee['last_name'] %}
+
+
+<style>
+
+    .chat {
+     display: block !important;
+     width: 100%;
+     height: auto !important;
+     overflow: scroll !important; 
+     position: absolute;
+     left: 4.5%;
+     top: 0;
+     background: rgba(0, 199, 140, 0.1);
+     z-index: -99999 !important;
+
+
+  }
+  
+  #chat-toolbar {
+    width: 100%;
+    height: 110px;
+    background: #fafafa;
+    font: 500 0.9em montserrat, sans-serif;
+    color: #1e1e1e; 
+    z-index: -9999 !important;
+  }
+  
+  #chat-toolbar img {
+    margin: 15px 0 0 35px;
+  }
+
+  #chat-toolbar .fa-user-circle {
+    margin: 15px 0 0 35px;
+  }
+  
+  #chat-toolbar span {
+   padding-top: 50px;
+   margin-left: 120px;
+   display: block;
+  }  
+    
+  #client-chat-message {
+    width: 45%;
+    height: 40px;
+    border-radius: 9px;
+    border: 1px solid #00c78c;
+    margin: 0 auto;
+    display: block;
+    outline: none;
+    position: fixed;
+    bottom: 200px;
+    left: 15%;
+    background: #E1F5EF;
+    padding-left: 5px;
+    z-index: 99999999 !important;
+  }
+  
+
+  /*
+  it is INDEED April 12th sir!!!!!!!!
+  
+  **/
+  .message-bubble {
+    background: #00c78c;
+    color: #fafafa;
+    font: 400 0.9em montserrat, sans-serif;
+    margin: 25px 0 35px 50px;
+    position: relative;
+    border-radius: 15px;
+    padding: 15px;
+    line-height: 1.7em;
+    width: 25%;
+  }
+  
+  .message-bubble:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 25px;
+    width: 0;
+    border-top: 10px solid #00c78c;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  .message-box {
+    width: 85%;
+    height: auto !important;
+    margin: 50px auto 10px auto;
+    overflow: scroll !important;
+    padding-bottom: 800px !important;
+    z-index: -999999 !important;
+
+  }
+
+
+  #chat-message-box {
+    background: #E1F5EF;
+    width: 100%;
+    height: 300px !important;
+    z-index: 999999 !important;
+
+  }
+  
+
+
+</style>
+
+ 
+
+<div class="chat" id="client-chat" data-id="{{ client['_id']}}" data-client="{{ client_name }}" data-payee-id="{{ payee['_id'] }}" data-payee="{{ payee['username'] }}">  
+    <div class="top">
+     <ul>
+         <li class="image" id="chat-toolbar">
+         {% if client['image'] == '' or  client['image'] == 'null' %}
+         <i class="fas fa-user-circle"></i><span>{{ client['first_name'] + " " + client['last_name']}}</span>
+         {% else %}
+         <img src="/static/images/{{ client['image'] }}"  alt="thumbnail"><span>{{ client['first_name'] + " " + client['last_name']}}</span>
+        {% endif %}
+          </li>
+        </ul> 
+    </div>
+    <div class="message-box">
+        {% for message in chat_messages['messages'] %}
+        <ul>
+          <li class="message-date">{{ message['date'].strftime('%A, %m %Y %I:%M %p') }}</li>
+            {% if message['sender'] ==  client['first_name'] %}
+              <li>{{ message['sender'] }}</li>
+              <li class="client-name message-bubble">{{ message['message'] }}</li>
+            {% else %}
+               <li>{{ message['sender'] }}</li>
+               <li class="payee-message message-bubble">{{ message['message'] }}</li>
+            {% endif %}
+
+        </ul>
+      {% endfor %}
+
+    </div>
+    <div id="chat-message-box">
+        <input type="text" name="chat-message" id="client-chat-message">
+    </div>
+  </div> 
+</div> 
+<script>
+    //$(() => {
+
+    //$('.message-box ul:gt(5)').css({ overflow: 'hidden !important' })   
+
+    //  $(window).scroll(function (event) {
+    //     if($(window).scrollTop() > 200) {
+    //         $('.message-box ul:gt(5)').css({
+    //             // background : 'linear-gradient(0deg, red, transparent 80%) no-repeat',
+    //             filter : 'blur(2px)'
+    //         })
+    //     } else {
+    //         $('.message-box ul:gt(5)').css({
+    //             // background : 'linear-gradient(0deg, red, transparent 80%) no-repeat',
+    //             filter : 'blur(0px)'
+    //         }) 
+    //     }
+    //   });
+    //})
+
+
+
+
+    // $(() => {
+    //             var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    //             function play_sound (sound_clip) {
+    //                 var soundElement = document.createElement('audio')
+    //                 soundElement.setAttribute('src', sound_clip)
+    //                 soundElement.play()
+    //             }
+
+    //             socket.on('connect', (e) => {
+    //               console.log('new user connected')
+    //             })
+
+
+    //             $('#chat-message').keyup(function(event) {
+    //                 event.preventDefault() 
+    //                 client = document.querySelector('#client-chat').getAttribute('data-client');
+    //                 clientID = document.querySelector('#client-chat').getAttribute('data-id');
+    //                 payeeID = document.querySelector('#client-chat').getAttribute('data-payee-id')
+    //                 payee = document.querySelector('#client-chat').getAttribute('data-payee');
+
+                
+    //                 if (event.which === 13) {
+    //                     var message = $('#chat-message').val()
+    //                     socket.emit('payeepro-chat', {
+    //                         username: client,
+    //                         room: clientID,
+    //                         payee: payee,
+    //                         payee_id: payeeID,
+    //                         message: message 
+    //                     })      
+                    
+    //                 }
+            
+            
+    //         })
+
+    //         socket.on('response', (msg) => {
+    //             play_sound('/static/sound/sms-alert-3-daniel_simon.mp3')
+    //             $('#chat-message').val('')
+    //             $('.message-box').append(`<div class="message-bubble">${msg.message}</div>`).show()
+    //        })
+
+    // })
+</script>
+<script src="{{ url_for('static', filename='javascript/chat.js')}}"></script>
+ {% endblock %} 

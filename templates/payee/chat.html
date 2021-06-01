@@ -1,0 +1,30 @@
+
+
+{% if url_for(request.endpoint) == '/dashboard/chat' %}
+{# this is from the chat page #} 
+{% extends 'layout.html' %}
+{% block content %}
+   {% include 'toolbar.html' %}
+   <div class="sidebar">
+    {% include 'chat-sidebar.html' %}
+    {% if not clients %}
+      <h1>Clients</h1>
+      <p>You have no clients. Be sure to add some in the future.</p>
+    {% elif messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    {% endif %}
+    <div class="content">
+      <h1>Hello, <span id="admin" data-admin_username="{{account['username']}}" data-admin-id="{{ account['_id'] }}">{{ account['first_name'] }}</span></h1>
+      <p>What would you like here Tam?</p>
+      <br>
+      <h1>Recent notification?</h1>
+  </div>
+
+{% endblock %} 
+
+{% else %}
+{#  This is dashboard chat #}
+  {% include 'chat-sidebar.html' %}
+{% endif %}

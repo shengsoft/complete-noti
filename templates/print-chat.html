@@ -1,0 +1,77 @@
+<style>
+    @media print {    
+         .print-logo {
+           width: 64px;
+           height: 64px;
+           margin: 50px 0 0 20px;
+         }
+ 
+         .print-logo #logo {
+            margin: 0 auto 0 20px;
+         }
+ 
+         
+         .columns {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #000;
+            color: #000;
+            position: relative;
+            top: 105px;
+         }
+ 
+         .headings {
+            display: inline-block;
+            border: 1px solid #000;
+            width: 25%;
+            padding: 15px 0 15px 10px;
+            font: 800 1.2em montserrat;
+            color: #000;
+         }
+ 
+         .rows {
+             padding: 15px 0 15px 10px;
+             font: 500 16pt montserrat;
+         }
+ 
+         #title {
+            position: absolute;
+            right: 15px; 
+            width: 55%;
+            font: 800 14pt montserrat;
+            text-align: right;
+         }
+ 
+         .print-logo p {
+             font: 800 12pt montserrat;
+             text-align: center;
+             width: 100px;
+             display: block;
+          }
+     }
+ 
+     @media screen {
+         #print-document {
+          display: none;
+         }
+     }
+ </style>
+ 
+ 
+
+ <div id="print-document">
+    <h1>Chat History</h1>
+    <ul>
+    {% for message in chat_history %}
+      {% for chat_message in message %}
+         {% for key, value in chat_message.items() %}
+          {% if key != 'date' %}
+          <li><span>{{ key }}:</span>{{ value }}</li>
+           {% else %}
+            <li><span>{{ key }}:</span>{{ value.strftime('%A, %m %Y %I:%M %p') }}</li>
+          {% endif %}  
+         {% endfor %}
+      {% endfor %}
+    {% endfor %}
+    </ul>
+ </div>

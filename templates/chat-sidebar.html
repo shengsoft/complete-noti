@@ -1,0 +1,29 @@
+<div id="search">
+    <input type="search" name="search" placeholder="  search" id="search-txtfld">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </div>
+  {% for client in clients %}
+  {% set client_name = client['first_name'] + " " + client['last_name'] %}
+  <div class="client-list" data-id="{{ client['_id']}}" data-client="{{ client_name }}">  
+  
+    <ul>
+      <li class="image">
+         {% if client['image'] == '' or  client['image'] == 'null' %}
+            <i class="fas fa-user-circle"></i>
+         {% else %}
+           <a href="#"><img src="../static/images/{{ client['image'] }}"  alt="thumbnail"></a></li>
+         {% endif %}
+     </ul> 
+     <span id="clientname">{{ client['first_name'] + " " + client['last_name']}}</span>
+  </div>
+  {% endfor %}
+  <div class="chat">  
+    <div class="top">
+     <ul>
+         <li class="image" id="chat-toolbar"></li>
+        </ul> 
+    </div>
+    <div class="message-box">
+    </div>
+    <input type="text" name="chat-message" id="chat-message">
+  </div> 

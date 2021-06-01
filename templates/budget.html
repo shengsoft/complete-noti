@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'toolbar.html' %}
+{% include 'sidebar.html' %}
+<div id="budget-container">
+    <div id="budget">
+        <h1>Budget</h1>
+        <p>Set your clients budget and details below</p>
+        <form method="post">
+            <input type="text" name="first_name" id="client-first-name" placeholder="First name" required>
+            <input type="text" name="middle_name" id="client-middle-name" placeholder="Middle name" value="n/a">
+            <input type="text" name="last_name" id="client-last-name" placeholder="Last name" required>
+            <input type="email" name="email" id="client-email" placeholder="E-mail" required>
+            <input type="text" name="ssn" id="client-ssn" placeholder="xxx-xx-xxxx" pattern="^d{3}-d{2}-d{4}$" maxlength="9" required>
+            <input type="date" name="dob" id="dob" >
+            <input type="number" name="budget_amount" id="budget_amount" placeholder="Social Security Benefit____$">
+            <input type="text" name="expenses_1" id="expenses_1" class="expenses" placeholder="Enter client expense">
+            <input type="number" name="amount_1" id="amount_1" class="expense_amount" placeholder="$0.00">
+            <input type="text" name="expenses_2" id="expenses_2" class="expenses" placeholder="Enter client expense">
+            <input type="number" name="amount_2" id="amount_2" class="expense_amount" placeholder="$0.00">
+            <input type="text" name="expenses_3" id="expenses_3" class="expenses" placeholder="Enter client expense">
+            <input type="number" name="amount_3" id="amount_3" class="expense_amount" placeholder="$0.00">
+            <input type="text" name="expenses_4" id="expenses_4" class="expenses" placeholder="Enter client expense">
+            <input type="number" name="amount_4" id="amount_4" class="expense_amount" placeholder="$0.00">
+            <input type="text" name="expenses_5" id="expenses_5" class="expenses" placeholder="Enter client expense">
+            <input type="number" name="amount_5" id="amount_5" class="expense_amount" placeholder="$0.00">
+        </form>
+        <button type="button" id="add-expenses-field">Add more expenses</button>
+        <button type="submit" formaction="/save" id="save-budget-items">Save Budget</button>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='javascript/budget.js')}}"></script>
+{% endblock %}

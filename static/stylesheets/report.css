@@ -1,0 +1,74 @@
+/* @import url("https://use.typekit.net/dgp4ock.css"); */
+
+@import url('https://p.typekit.net/p.css?s=1&k=dgp4ock&ht=tk&f=16353.37461.37466.37467.37478.37479.37484.37485&a=31353385&app=typekit&e=css');
+
+/* @font-face {
+    font-family: Gentium;
+    src: url(http://example.com/fonts/Gentium.otf);
+} */
+
+
+@font-face {
+    font-family: Montserrat-Black;
+    src: url('file:///Users/mongoose/Desktop/payee_pro/static/fonts/Montserrat/Montserrat-Black.ttf');
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url('file:///Users/mongoose/Desktop/payee_pro/static/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+
+body {
+ 
+}
+
+#report h2 {
+  font: 800 1.2em Montserrat-Black, sans-serif; 
+}
+
+#report ul {
+   width: auto;
+   float: right;
+}
+
+#report ul li {
+  list-style-type: none;
+  font: 200 0.7em Montserrat, sans-serif;
+  display: block;
+  padding-right: 10px;
+}
+
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+    border: 1px solid rgba(165, 165, 165, 0.4);   
+  border-collapse: collapse;
+}
+
+
+th td {
+  padding: 15px 25px;
+  text-align: left;
+}
+
+th {
+  background: #34925E;
+  font: 600 0.8em 'montserrat', sans-serif;
+  color: #fafafa;   
+}
+
+td {
+  font: 300 0.9em montserrat, sans-serif;
+}
+
+tr:nth-child(even) {
+  background: #fafafa; 
+}
+
+tr:nth-child(odd) {
+    background: #ebeaea; 
+}

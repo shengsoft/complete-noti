@@ -1,0 +1,84 @@
+<!-- <style>
+  table { border-collapse: separate; line-height:25px; }
+tr { display: block; float: left; width:200px;}
+th,  td { display: block; }
+</style> -->
+<div id="report">
+  <h2>Payee Pro</h2>
+  <ul>
+    {% for client_details in client %}   
+       <li>Client: {{ client_details['name'] }} </li>
+       <li>Social Security number: {{ client_details['ssn'] }} </li>
+       <li>Email: {{ client_details['email'] }} </li>
+    {% endfor %}   
+   </ul>
+
+{% if '/dashboard/print/pdf/monthly-statement' in request.path  %}
+{% for data in data['expenses'] %}
+<table border="1" align='center' width='100%' cellspacing="1" cellpadding="1">
+    
+    <tr>
+        {% for key, value in data.items() %}
+          {% if key == 'income_source' %}
+            <th width='15%'>income source</th>
+          {% elif key == 'budget_amount' %}
+          <th width='15%'>budget amount</th>
+          {% else %}
+            <th width='15%'>{{ key }}</th>
+          {% endif %}
+        {% endfor %}  
+    </tr>
+     
+    <tr>
+        {% for key, value in data.items() %}
+        <td>{{ value }}</td>
+        {% endfor %} 
+    </tr>
+
+</table>
+{% endfor %}
+
+
+{% elif '/dashboard/print/pdf/annual-statement' in request.path  %}
+<h3>Additional Expenses</h3>
+
+<table border="1" align='center' width='100%' cellspacing="1" cellpadding="1">
+  <!-- <tr>  
+  {% for key in items %}
+    {% if key == 'income_source' %}
+        <th>income source</th>
+    {% elif key == 'amount' %}
+        <th>amount</th>
+    {% elif key == 'expense' %}
+        <th>expense</th>
+    {% elif key == 'expense_amount' %}
+        <th>expense amount</th>
+    {% elif key == 'budget_date' %}
+        <th>budget date</th>
+    {% endif %}
+  {% endfor %}  
+  </tr> -->
+  {% for item in data %}
+  <tr><td>{{ item['income_source'] }}</td></tr>
+  <tr><td>{{ item['amount'] }}</td></tr>
+    <tr>   <td> {{ item['expense'] }}</td></tr>
+      <tr>  <td>{{ item['expense_amount'] }}</td></tr>
+        <tr> <td> {{ item['budget_date'] }}</td>
+ 
+    </tr>
+    {% endfor %}  
+  </table>
+
+
+   
+
+
+{% elif '/dashboard/print/pdf/chat-history' in request.path  %}
+
+ {{ type }}
+
+{% endif %}
+
+
+  
+</div>

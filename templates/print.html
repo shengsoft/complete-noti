@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'toolbar.html' %}
+{% include 'sidebar.html' %}
+<div class="print">
+    <h1>Print Record</h1>
+    <div class="accordion"> 
+        <div class="monthly-statement">
+            <h1>Monthly Statement</h1>
+        </div>
+        <div class="annual-statement">
+            <h1>Annual Statement</h1>
+        </div>
+        <div class="chat-history">
+            <h1>Chat History</h1>
+        </div>
+    </div>
+    <br>
+    <a type="button"  id="print-report-button" href="#">Print report</a>
+    <a type="button" id="generate-report-button" href="#">Generate PDF</a>
+    <a type="button" id="generate-spreadsheet-button" href="#">Generate spreadsheet</a>
+    <div id="print-document" style="display: none;"></div>
+</div>
+{% endblock %}

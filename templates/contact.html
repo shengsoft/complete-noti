@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="https://use.typekit.net/dgp4ock.css">  
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+       <style>
+
+           *{
+               padding: 0;
+               margin: 0;
+           }
+
+           html {
+             box-sizing: border-box;
+           }
+           body {
+              background: rgba(0, 199, 140, 0.3);
+            } 
+
+            ul {
+              margin-top: 25px;  
+              text-align: center;
+            }
+
+            ul li {
+               list-style-type: none; 
+               font-size: 1.2em !important;
+               margin-bottom: 5px;
+            }
+
+
+           .container  {
+             background: #fafafa;
+             width: 45%;
+             height: 480px;
+             margin-top: 75px;
+             padding: 50px;
+           }
+
+            .container header {
+            }
+
+            .container header h1 {
+              font: 800 2em montserrat, sans-serif;
+              color: #34925E;
+              text-align: center;
+              margin-top: 75px;
+            } 
+
+            .container main div {
+              width: 100%;
+              margin: 50px auto 0 auto;
+            }
+
+            .container main div p {
+              font: 400 1em montserrat, sans-serif;
+              color: #1e1e1e;
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+            }
+
+            .container main div h1 {
+              font: 400 1.4em montserrat, sans-serif;
+              color: #34925E;    
+              background: rgb(0, 199, 140, 0.3);
+              border-radius: 10px;
+              padding: 15px;  
+              margin: 25px auto 0 auto;
+              text-align: center !important;
+
+            }
+
+
+            .container footer {
+              margin-top: 200px;
+              width: 100%;
+            }
+
+
+
+            .container footer ul {
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+            }
+
+            .container footer ul li {
+                text-align: center;
+                font-family: montserrat,sans-serif;
+                font-weight: 500;
+                font-style: normal; 
+                font-size: 0.8em;
+                margin: 10px 0;
+                color: #1e1e1e;
+                list-style-type: none;
+                display: inline;
+                padding-right: 5px;
+            }
+
+            .container footer ul li:last-child {
+               text-align: center;
+            }   
+
+            .container a {
+                color: #34925E;
+                font-family: montserrat,sans-serif;
+            }
+
+            @media(max-width: 414px) {
+                .container  {
+                    background: #fafafa;
+                    width: 95%;
+                }
+
+                body {
+                background: rgba(0, 199, 140, 0.3);
+               } 
+
+            }    
+
+
+
+       </style>
+    </head>
+    <body> 
+    <div class="container">   
+     <header>
+         <h1>Payee Pro - Contact Form</h1>
+     </header>   
+      <main>
+        <div>
+            <p>A message was received. The details are listed below</p>
+            <ul>
+              <li>Name: {{name}}</li>
+              <li>Email: {{email}}</li>
+              <li>Subject: {{subject}}</li>
+              <li>Message: {{message}}</li>
+            </ul>
+        </div>
+      </main>  
+       <footer>
+        <ul>
+          <li>Payee Pro</li>
+          <li>Tel: 909-494-2186</li>
+          <li>Email: payeepro@gmail.com</li>
+          <li><br></li>
+          <li>Address: 473 E. Carnegie Drive, San Bernardino, CA</li>
+        </ul>
+       </footer>
+       </div>  
+    </body>
+</html>
